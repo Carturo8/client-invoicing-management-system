@@ -114,9 +114,9 @@ Editar el archivo `.env` con tus credenciales:
 
 ```env
 # PostgreSQL Configuration
-DB_HOST=tu-host.supabase.co
-DB_USER=tu_usuario
-DB_PASSWORD=tu_contraseña
+DB_HOST=your-supabase-project.supabase.co
+DB_USER=your_supabase_username
+DB_PASSWORD=your_supabase_password
 DB_NAME=postgres
 DB_PORT=6543
 
@@ -249,37 +249,37 @@ El sistema utiliza 4 tablas principales:
 ### Clients
 ```sql
 - client_id (SERIAL PRIMARY KEY)
-- client_name (VARCHAR)
-- client_address (VARCHAR)
-- client_phone (VARCHAR)
-- client_email (VARCHAR UNIQUE)
+- client_name (VARCHAR(100) NOT NULL)
+- client_address (VARCHAR(255) NOT NULL)
+- client_phone (VARCHAR(100) NOT NULL)
+- client_email (VARCHAR(150) NOT NULL UNIQUE)
 ```
 
 ### Platforms
 ```sql
 - platform_id (SERIAL PRIMARY KEY)
-- platform_name (VARCHAR)
+- platform_name (VARCHAR(100) NOT NULL)
 ```
 
 ### Invoices
 ```sql
-- invoice_id (VARCHAR PRIMARY KEY)
-- invoice_date (TEXT)
-- invoiced_amount (NUMERIC)
-- amount_paid (NUMERIC)
-- client_id (FK -> clients)
+- invoice_id (VARCHAR(50) PRIMARY KEY)
+- invoice_date (TEXT NOT NULL)
+- invoiced_amount (NUMERIC(10,2))
+- amount_paid (NUMERIC(10,2))
+- client_id (INTEGER REFERENCES clients(client_id) NOT NULL)
 ```
 
 ### Transactions
 ```sql
-- transaction_id (VARCHAR PRIMARY KEY)
-- transaction_date (TIMESTAMP)
-- transaction_amount (NUMERIC)
-- transaction_status (VARCHAR)
-- transaction_type (VARCHAR)
-- client_id (FK -> clients)
-- platform_id (FK -> platforms)
-- invoice_id (FK -> invoices)
+- transaction_id (VARCHAR(50) PRIMARY KEY)
+- transaction_date (TIMESTAMP NOT NULL)
+- transaction_amount (NUMERIC(10,2) NOT NULL)
+- transaction_status (VARCHAR(100) NOT NULL)
+- transaction_type (VARCHAR(100) NOT NULL)
+- client_id (INTEGER REFERENCES clients(client_id) NOT NULL)
+- platform_id (INTEGER REFERENCES platforms(platform_id) NOT NULL)
+- invoice_id (VARCHAR(50) REFERENCES invoices(invoice_id) NOT NULL)
 ```
 
 Ver el diagrama completo en `docs/Assessment_ERM.png`
