@@ -1,4 +1,4 @@
-# Assessment - Sistema CRUD de Gestión de Clientes, Facturas y Transacciones
+# Sistema CRUD de Gestión de Clientes, Facturas y Transacciones
 
 Sistema completo de gestión que permite administrar clientes, facturas, transacciones y generar reportes. Construido con una arquitectura cliente-servidor moderna usando Node.js, Express, PostgreSQL y Vanilla JavaScript.
 
