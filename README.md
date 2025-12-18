@@ -84,19 +84,15 @@ npm install
 
 #### Opción A: PostgreSQL Local
 
-1. Crear la base de datos:
+1. Conectarse a PostgreSQL y crear la base de datos ejecutando el script de schema desde el directorio raíz del proyecto:
 ```bash
-psql -U postgres
+cd /ruta/a/Assessment
+psql -U postgres -f backend/database/schema/schema_data.sql
 ```
 
-2. Ejecutar el script de schema:
-```sql
-\i backend/database/schema/schema_data.sql
-```
-
-3. (Opcional) Cargar datos de prueba:
-```sql
-\i backend/database/seeds/seed_data.sql
+2. (Opcional) Cargar datos de prueba:
+```bash
+psql -U postgres -d pd_carlos_rojas_gosling -f backend/database/seeds/seed_data.sql
 ```
 
 #### Opción B: Supabase
@@ -324,7 +320,7 @@ Para usar la colección:
 - Conexión SSL a PostgreSQL habilitada
 - CORS configurado para desarrollo
 - ⚠️ **Nota**: Antes de desplegar en producción, asegúrate de:
-  - Eliminar credenciales hardcodeadas en `backend/config/db.js`
+  - Configurar todas las variables de entorno en el archivo `.env`
   - Configurar CORS para dominios específicos
   - Implementar autenticación y autorización
   - Usar HTTPS
